@@ -111,7 +111,7 @@ NOTES:
  */
 int absVal(int x)
 {
-    return 42;
+    return (x ^ (x >> 31)) - (x >> 31);
 }
 
 /*
