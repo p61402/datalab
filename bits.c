@@ -173,7 +173,11 @@ int allOddBits(int x)
  */
 int anyEvenBit(int x)
 {
-    return 42;
+    x |= x >> 16;
+    x |= x >> 8;
+    x |= x >> 4;
+    x |= x >> 2;
+    return x & 1;
 }
 
 /*
