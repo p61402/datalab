@@ -124,7 +124,9 @@ int absVal(int x)
  */
 int addOK(int x, int y)
 {
-    return (((x ^ y) >> 31) & 0x1) || !((((x + y) ^ (x & y)) >> 31) & 0x1);
+    int same = !(((x ^ y) >> 31) & 0x1);
+    int sign = ((x + y) >> 31) & 0x1;
+    return !(same & (sign ^ ((x >> 31) & 0x1)));
 }
 
 /*
