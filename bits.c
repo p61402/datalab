@@ -445,7 +445,10 @@ int dividePower2(int x, int n)
  */
 int evenBits(void)
 {
-    return 42;
+    int x = 0x55;
+    x |= (x << 8);
+    x |= (x << 16);
+    return x;
 }
 
 /*
