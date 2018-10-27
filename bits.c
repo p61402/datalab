@@ -434,7 +434,7 @@ int distinctNegation(int x)
  */
 int dividePower2(int x, int n)
 {
-    return 42;
+    return (x + (x >> 31 & ((1 << n) + ~0))) >> n;
 }
 
 /*
