@@ -360,7 +360,16 @@ int bitXor(int x, int y)
  */
 int byteSwap(int x, int n, int m)
 {
-    return 42;
+    int a = 0xFF;
+
+    int n_shift = n << 3;
+    int m_shift = m << 3;
+    int remain = x & ~((a << n_shift) | (a << m_shift));
+
+    int n_byte = (a & ((x & (a << n_shift)) >> n_shift)) << m_shift;
+    int m_byte = (a & ((x & (a << m_shift)) >> m_shift)) << n_shift;
+
+    return remain | n_byte | m_byte;
 }
 
 /*
