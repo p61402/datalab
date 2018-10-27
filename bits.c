@@ -324,7 +324,17 @@ int bitParity(int x)
  */
 int bitReverse(int x)
 {
-    return 42;
+    int a0 = 0xFF | (0xFF << 8);
+    int a1 = 0xFF | (0xFF << 16);
+    int a2 = a1 ^ (a1 << 4);
+    int a3 = a2 ^ (a2 << 2);
+    int a4 = a3 ^ (a3 << 1);
+
+    x = ((x & a4) << 1) | ((x >> 1) & a4);
+    x = ((x & a3) << 2) | ((x >> 2) & a3);
+    x = ((x & a2) << 4) | ((x >> 4) & a2);
+    x = ((x & a1) << 8) | ((x >> 8) & a1);
+    return (x << 16) | ((x >> 16) & a0);
 }
 
 /*
