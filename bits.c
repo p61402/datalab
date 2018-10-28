@@ -235,13 +235,18 @@ int bitAnd(int x, int y)
  */
 int bitCount(int x)
 {
-    int c;
-    c = (x & 0x55555555) + ((x >> 1) & 0x55555555);
-    c = (c & 0x33333333) + ((c >> 2) & 0x33333333);
-    c = (c & 0x0F0F0F0F) + ((c >> 4) & 0x0F0F0F0F);
-    c = (c & 0x00FF00FF) + ((c >> 8) & 0x00FF00FF);
-    c = (c & 0x0000FFFF) + ((c >> 16) & 0x0000FFFF);
-    return c;
+    int a0 = 0xFF | (0xFF << 8);
+    int a1 = a0 ^ (a0 << 8);
+    int a2 = a1 ^ (a1 << 4);
+    int a3 = a2 ^ (a2 << 2);
+    int a4 = a3 ^ (a3 << 1);
+
+    x = (x & a4) + ((x >> 1) & a4);
+    x = (x & a3) + ((x >> 2) & a3);
+    x = (x & a2) + ((x >> 4) & a2);
+    x = (x & a1) + ((x >> 8) & a1);
+    x = (x & a0) + ((x >> 16) & a0);
+    return x;
 }
 
 /*
