@@ -640,9 +640,9 @@ int floatIsEqual(unsigned uf, unsigned ug)
 int floatIsLess(unsigned uf, unsigned ug)
 {
     unsigned uf_usb = uf & 0x7FFFFFFF, ug_sub = ug & 0x7FFFFFFF;
-    unsigned uf_sign = !!(uf & 0x80000000), ug_sign = !!(ug & 0x80000000);
-    unsigned uf_exp = uf & 0x7F800000, ug_exp = ug & 0x7F800000;
-    unsigned uf_frac = uf & 0x007FFFFF, ug_frac = ug & 0x007FFFFF;
+    unsigned uf_sign, ug_sign;
+    unsigned uf_exp, ug_exp;
+    unsigned uf_frac, ug_frac;
 
     if (uf_usb > 0x7F800000 || ug_sub > 0x7F800000)
         return 0;
@@ -650,10 +650,19 @@ int floatIsLess(unsigned uf, unsigned ug)
     if (!(uf_usb | ug_sub))
         return 0;
 
+    uf_sign = !!(uf & 0x80000000);
+    ug_sign = !!(ug & 0x80000000);
+
     if (uf_sign < ug_sign)
         return 0;
     else if (uf_sign > ug_sign)
         return 1;
+
+    uf_exp = uf & 0x7F800000;
+    ug_exp = ug & 0x7F800000;
+
+    uf_frac = uf & 0x007FFFFF;
+    ug_frac = ug & 0x007FFFFF;
 
     if (uf_sign == 0) {
         if (uf_exp < ug_exp)
