@@ -615,7 +615,15 @@ unsigned floatInt2Float(int x)
  */
 int floatIsEqual(unsigned uf, unsigned ug)
 {
-    return 42;
+    unsigned uf_usb = uf & 0x7FFFFFFF, ug_sub = ug & 0x7FFFFFFF;
+
+    if (!(uf_usb | ug_sub))
+        return 1;
+
+    if (uf_usb > 0x7F800000 || ug_sub > 0x7F800000)
+        return 0;
+
+    return uf == ug;
 }
 
 /*
