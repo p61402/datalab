@@ -565,7 +565,41 @@ int floatFloat2Int(unsigned uf)
  */
 unsigned floatInt2Float(int x)
 {
-    return 42;
+    int sign = x & 0x80000000;
+    int exp = -1;
+    int frac = 0;
+
+    if (x == 0)
+        return 0;
+    else if (x == 0x80000000)
+        return 0xcf000000;
+
+    if (sign)
+        x = ~x + 1;
+
+    frac = x;
+
+    while (x) {
+        x /= 2;
+        exp++;
+    }
+
+    if (exp <= 23)
+        frac <<= (23 - exp);
+    else {
+        frac += (1 << (exp - 24));
+        if (!(frac << (55 - exp)))
+            frac &= (0xFFFFFFFF << (exp - 22));
+        if (!(frac & (1 << exp)))
+            exp++;
+        frac >>= (exp - 23);
+    }
+
+    frac &= 0x007fffff;
+
+    exp = (exp + 127) << 23;
+
+    return sign | exp | frac;
 }
 
 /*
