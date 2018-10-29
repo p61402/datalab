@@ -1444,7 +1444,10 @@ int subtractionOK(int x, int y)
  */
 int thirdBits(void)
 {
-    return 42;
+    int x = 0x49;
+    x |= (x << 9);
+    x |= (x << 18);
+    return x;
 }
 
 /*
