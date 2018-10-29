@@ -1285,7 +1285,14 @@ int oddBits(void)
  */
 int remainderPower2(int x, int n)
 {
-    return 42;
+    int sign = x >> 31;
+    int pos = x + (~((x >> n) << n) + 1);
+    int neg;
+    x = ~x + 1;
+    neg = x + (~((x >> n) << n) + 1);
+    neg = ~neg + 1;
+
+    return (~sign & pos) | (sign & neg);
 }
 
 /*
