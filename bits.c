@@ -1062,7 +1062,20 @@ int isNotEqual(int x, int y)
  */
 int isPallindrome(int x)
 {
-    return 42;
+    int x_ = x;
+    int a0 = 0xFF | (0xFF << 8);
+    int a1 = a0 ^ (a0 << 8);
+    int a2 = a1 ^ (a1 << 4);
+    int a3 = a2 ^ (a2 << 2);
+    int a4 = a3 ^ (a3 << 1);
+
+    x_ = (x_ << 16) | ((x_ >> 16) & a0);
+    x_ = ((x_ & a1) << 8) | ((x_ >> 8) & a1);
+    x_ = ((x_ & a2) << 4) | ((x_ >> 4) & a2);
+    x_ = ((x_ & a3) << 2) | ((x_ >> 2) & a3);
+    x_ = ((x_ & a4) << 1) | ((x_ >> 1) & a4);
+
+    return !(x ^ x_);
 }
 
 /*
