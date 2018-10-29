@@ -981,7 +981,11 @@ int isGreater(int x, int y)
  */
 int isLess(int x, int y)
 {
-    return 42;
+    int sign_x = x >> 31;
+    int sign_y = y >> 31;
+    int equal = (!(sign_x ^ sign_y)) & ((~x + y) >> 31);
+    int not_equal = (!sign_x) & sign_y;
+    return !(equal | not_equal);
 }
 
 /*
