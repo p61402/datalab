@@ -1113,7 +1113,8 @@ int isPower2(int x)
  */
 int isTmax(int x)
 {
-    return 42;
+    x++;
+    return (!((~x + 1) ^ x)) & !!x;
 }
 
 /*
