@@ -1267,7 +1267,12 @@ int negate(int x)
  */
 int oddBits(void)
 {
-    return 42;
+    int x = 2;
+    x |= x << 2;
+    x |= x << 4;
+    x |= x << 8;
+    x |= x << 16;
+    return x;
 }
 
 /*
