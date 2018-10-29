@@ -1195,7 +1195,7 @@ int logicalNeg(int x)
  */
 int logicalShift(int x, int n)
 {
-    return 42;
+    return (x >> n) & (~(((1 << 31) >> n) << 1));
 }
 
 /*
