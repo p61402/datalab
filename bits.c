@@ -763,7 +763,20 @@ unsigned floatScale1d2(unsigned uf)
  */
 unsigned floatScale2(unsigned uf)
 {
-    return 42;
+    unsigned sign = uf & 0x80000000;
+    unsigned exp = (uf & 0x7F800000) >> 23;
+
+    if (exp == 255)
+        return uf;
+
+    if (exp == 0)
+        return sign | (uf << 1);
+
+    exp++;
+    if (exp == 255)
+        return sign | 0x7F800000;
+
+    return (uf & 0x807FFFFF) | (exp << 23);
 }
 
 /*
