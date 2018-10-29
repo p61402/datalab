@@ -1335,7 +1335,9 @@ int rotateLeft(int x, int n)
  */
 int rotateRight(int x, int n)
 {
-    return 42;
+    int mask = ((1 << 31) >> n) << 1;
+    int r = (~((1 << 31) >> (31 - n)) & x) << (32 - n);
+    return ((x >> n) & ~mask) | (r & mask);
 }
 
 /*
