@@ -1267,9 +1267,7 @@ int negate(int x)
  */
 int oddBits(void)
 {
-    int x = 2;
-    x |= x << 2;
-    x |= x << 4;
+    int x = 0xAA;
     x |= x << 8;
     x |= x << 16;
     return x;
