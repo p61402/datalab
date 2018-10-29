@@ -1050,7 +1050,7 @@ int isNonZero(int x)
  */
 int isNotEqual(int x, int y)
 {
-    return 42;
+    return !!(x ^ y);
 }
 
 /*
