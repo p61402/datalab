@@ -1100,7 +1100,8 @@ int isPositive(int x)
  */
 int isPower2(int x)
 {
-    return 42;
+    int minus_noe = (~0 ^ (x >> 31));
+    return !((x & (x + minus_noe)) | !x);
 }
 
 /*
