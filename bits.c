@@ -806,7 +806,35 @@ unsigned floatScale64(unsigned uf)
  */
 unsigned floatUnsigned2Float(unsigned u)
 {
-    return 42;
+    int exp = -1;
+    int frac = 0;
+
+    if (u == 0)
+        return 0;
+
+    frac = u;
+
+    while (u) {
+        u /= 2;
+        exp++;
+    }
+
+    if (exp <= 23)
+        frac <<= (23 - exp);
+    else {
+        frac += (1 << (exp - 24));
+        if (!(frac << (55 - exp)))
+            frac &= (0xFFFFFFFF << (exp - 22));
+        if (!(frac & (1 << exp)))
+            exp++;
+        frac >>= (exp - 23);
+    }
+
+    frac &= 0x007fffff;
+
+    exp = (exp + 127) << 23;
+
+    return exp | frac;
 }
 
 /*
