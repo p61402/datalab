@@ -1458,7 +1458,7 @@ int thirdBits(void)
  */
 int tmax(void)
 {
-    return 42;
+    return ~(1 << 31);
 }
 
 /*
