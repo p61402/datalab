@@ -1320,7 +1320,9 @@ int replaceByte(int x, int n, int c)
  */
 int rotateLeft(int x, int n)
 {
-    return 42;
+    int mask = ((1 << 31) >> (31 - n));
+    int r = (((((1 << 31) >> n) << 1) & x) >> (32 - n));
+    return ((x << n) & mask) | (r & ~mask);
 }
 
 /*
