@@ -1306,7 +1306,8 @@ int remainderPower2(int x, int n)
  */
 int replaceByte(int x, int n, int c)
 {
-    return 42;
+    int mask = 0xFF << (n << 3);
+    return (mask & (c << (n << 3))) | (~mask & x);
 }
 
 /*
