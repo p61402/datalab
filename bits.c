@@ -941,7 +941,7 @@ int intLog2(int x)
  */
 int isAsciiDigit(int x)
 {
-    return 42;
+    return !((x >> 3) ^ 6) | !(x ^ 0x38) | !(x ^ 0x39);
 }
 
 /*
