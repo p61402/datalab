@@ -1469,7 +1469,7 @@ int tmax(void)
  */
 int tmin(void)
 {
-    return 42;
+    return 1 << 31;
 }
 
 /*
