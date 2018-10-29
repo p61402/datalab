@@ -847,7 +847,7 @@ unsigned floatUnsigned2Float(unsigned u)
  */
 int getByte(int x, int n)
 {
-    return 42;
+    return (x >> (n << 3)) & 0xFF;
 }
 
 /*
