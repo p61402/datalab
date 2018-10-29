@@ -1526,5 +1526,6 @@ int twosComp2SignMag(int x)
  */
 int upperBits(int n)
 {
-    return 42;
+    int except = ~(!n) + 1;
+    return (except & 0) | (~except & ((1 << 31) >> (n - 1)));
 }
