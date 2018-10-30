@@ -402,7 +402,25 @@ int conditional(int x, int y, int z)
  */
 int countLeadingZero(int x)
 {
-    return 42;
+    int a0 = 0xFF | (0xFF << 8);
+    int a1 = a0 ^ (a0 << 8);
+    int a2 = a1 ^ (a1 << 4);
+    int a3 = a2 ^ (a2 << 2);
+    int a4 = a3 ^ (a3 << 1);
+
+    x |= x >> 1;
+    x |= x >> 2;
+    x |= x >> 4;
+    x |= x >> 8;
+    x |= x >> 16;
+    x = ~x;
+
+    x = (x & a4) + ((x >> 1) & a4);
+    x = (x & a3) + ((x >> 2) & a3);
+    x = (x & a2) + ((x >> 4) & a2);
+    x = (x & a1) + ((x >> 8) & a1);
+    x = (x & a0) + ((x >> 16) & a0);
+    return x;
 }
 
 /*
