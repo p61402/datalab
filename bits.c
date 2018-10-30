@@ -1454,7 +1454,9 @@ int sign(int x)
  */
 int signMag2TwosComp(int x)
 {
-    return 42;
+    int sign = x >> 31;
+    int mag = x & ~(1 << 31);
+    return (sign & (~mag + 1)) | (~sign & mag);
 }
 
 /*
