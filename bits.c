@@ -1495,7 +1495,9 @@ int tmin(void)
  */
 int trueFiveEighths(int x)
 {
-    return 42;
+    int const eights = x >> 3;
+    int const rem = x & 7;
+    return eights + (eights << 2) + ((rem + (rem << 2) + (x >> 31 & 7)) >> 3);
 }
 
 /*
