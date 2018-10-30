@@ -469,7 +469,10 @@ int evenBits(void)
  */
 int ezThreeFourths(int x)
 {
-    return 42;
+    int add;
+    x = (x << 1) + x;
+    add = (x >> 31) & 3;
+    return (x + add) >> 2;
 }
 
 /*
