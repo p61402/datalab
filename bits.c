@@ -1353,7 +1353,12 @@ int rotateRight(int x, int n)
  */
 int satAdd(int x, int y)
 {
-    return 42;
+    int sum = x + y;
+    int sign = sum >> 31;
+    int overflow =
+        (((!(x >> 31) ^ (y >> 31)) & !!((sum >> 31) ^ (x >> 31))) << 31) >> 31;
+    return (overflow & ((~sign & (1 << 31)) | (sign & ~(1 << 31)))) |
+           (~overflow & sum);
 }
 
 /*
