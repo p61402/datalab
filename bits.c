@@ -1432,7 +1432,10 @@ int satMul2(int x)
  */
 int satMul3(int x)
 {
-    return 42;
+    int x2 = x + x;
+    int x3 = x + x2;
+    int g = ((x ^ x2) | (x ^ x3)) >> 31;
+    return ((~g) & x3) + (g & ((1 << 31) + ~(x >> 31)));
 }
 
 /*
