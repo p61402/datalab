@@ -1401,7 +1401,7 @@ int satMul3(int x)
  */
 int sign(int x)
 {
-    return 42;
+    return (x >> 31) | (!!x);
 }
 
 /*
