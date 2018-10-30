@@ -1512,7 +1512,9 @@ int trueFiveEighths(int x)
  */
 int trueThreeFourths(int x)
 {
-    return 42;
+    int const four = x >> 2;
+    int const rem = x & 3;
+    return four + (four << 1) + ((rem + (rem << 1) + (x >> 31 & 3)) >> 2);
 }
 
 /*
