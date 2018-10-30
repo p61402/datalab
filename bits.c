@@ -1412,7 +1412,11 @@ int satAdd(int x, int y)
  */
 int satMul2(int x)
 {
-    return 42;
+    int sign_x = x >> 31;
+    int sign_2x = (x << 1) >> 31;
+    int overflow = ~(!(sign_x ^ sign_2x)) + 1;
+    return (overflow & (x << 1)) |
+           (~overflow & ((~sign_x & ~(1 << 31)) | (sign_x & (1 << 31))));
 }
 
 /*
