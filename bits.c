@@ -1438,7 +1438,9 @@ int specialBits(void)
  */
 int subtractionOK(int x, int y)
 {
-    return 42;
+    int x_y_not_same_sign = !!((x >> 31) ^ (y >> 31));
+    int y_sub_same_sign = !(((x - y) >> 31) ^ (y >> 31));
+    return !(x_y_not_same_sign & y_sub_same_sign);
 }
 
 /*
