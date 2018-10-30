@@ -1278,7 +1278,12 @@ int maximumOfTwo(int x, int y)
  */
 int minimumOfTwo(int x, int y)
 {
-    return 42;
+    int sign_x = x >> 31;
+    int sign_y = y >> 31;
+    int same = ~(!(sign_x ^ sign_y)) + 1;
+    int larger = ~((x - y) >> 31);
+    return (same & ((larger & y) | (~larger & x))) |
+           (~same & ((sign_x & x) | (sign_y & y)));
 }
 
 /*
